@@ -37,7 +37,7 @@
                     str += "<table><tr><td>"+item.userName+"</td>"+
                            "<td>"+item.password+"</td>"+
                            "<td><input type=\"button\" value=\"delete\" onclick=\"del("+item.id+")\"></td>"+
-                           "<td><input type=\"button\" value=\"edit\" onclick=\"editShow("+item.id+","+item.userName+","+item.password+")\"></td></tr></table>";
+                           "<td><input type=\"button\" value=\"edit\" onclick=\"editShow("+item.id+",'"+item.userName+"','"+item.password+"')\"></td></tr></table>";
                });
                $("#alluser").html(str);
            }
@@ -68,16 +68,21 @@
     function edit(id){
         var userName = $("#userName").val();
         var password = $("#password").val();
-        $.ajax({
-           type: "POST",
-           data:{id: id, userName:userName, password:password},
-           url: "/user/edit",
-           success: function (data) {
-               alert(data);
-               $("#edituser").html("");
-               findAll();
-           }
-       });
+        if (userName == "" || password == "") {
+            alert("please put infomation!");
+        } else {
+            $.ajax({
+               type: "POST",
+               data:{id: id, userName:userName, password:password},
+               url: "/user/edit",
+               success: function (data) {
+                   alert(data);
+                   $("#edituser").html("");
+                   findAll();
+               }
+           });
+        }
+
 
     }
 
