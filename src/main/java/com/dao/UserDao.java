@@ -8,6 +8,6 @@ import javax.inject.Named;
  * Created by root on 16-9-28.
  */
 @Named
-public class UserDao extends BaseDao<User, String> {
+public class UserDao extends BaseDao<User, Long> {
 
 }

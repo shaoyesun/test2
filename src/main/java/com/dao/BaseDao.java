@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class BaseDao<T, PK extends Serializable> {
+public class BaseDao<T, PK extends Long> {
 
     private static Logger log = Logger.getLogger(BaseDao.class);
     private SessionFactory sessionFactory;
@@ -37,6 +37,21 @@ public class BaseDao<T, PK extends Serializable> {
         getSession().save(t);
     }
 
+    public List<T> findAll() {
+        Criteria c = getSession().createCriteria(clazz);
+        return c.list();
+    }
 
+    public void del(PK id) {
+        getSession().delete(findById(id));
+    }
+
+    public T findById(PK id) {
+        return (T) getSession().get(clazz, id);
+    }
+
+    public void update(T t) {
+        getSession().update(t);
+    }
 
 }
