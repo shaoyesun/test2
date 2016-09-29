@@ -2,6 +2,7 @@ package com.controller;
 
 import com.service.UserService;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
+    private static Logger log = Logger.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
@@ -28,6 +31,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(String userName, String password) {
         userService.register(userName, password);
+        log.info("userName = " + userName + " add success!");
         return "success";
     }
 
@@ -40,12 +44,14 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     public String del(Long id) {
+        log.info("id = " + id + " del success!");
         return userService.del(id);
     }
 
     @ResponseBody
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String edit(Long id, String userName, String password) {
+        log.info("id = " + id + ", userName = " + userName + " edit success!");
         return userService.update(id, userName, password);
     }
 
