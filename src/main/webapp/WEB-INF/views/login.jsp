@@ -11,7 +11,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="/user/login" method="post">
+    <form action="/other/login" method="post">
         user name:<input type="text" name="userName">${message}<br><br>
         user pass:<input type="text" name="password"><br><br>
         <input type="submit" value="Login">
