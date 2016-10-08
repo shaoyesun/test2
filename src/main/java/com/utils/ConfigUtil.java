@@ -18,18 +18,18 @@ import java.util.Map;
 /**
  * 该文件专门用来读取service.properties配置文件
  */
-public class ServiceConfigUtil {
+public class ConfigUtil {
 
     private static Map<String, String> map = null;
     private static Long oldModifyDate = 0l;
     private static String path;
-    private static Logger log = Logger.getLogger(ServiceConfigUtil.class);
+    private static Logger log = Logger.getLogger(ConfigUtil.class);
 
     /**
      * 将配置文件装载到map对象中
      */
     private static void init() {
-        URL url = ServiceConfigUtil.class.getResource("/");
+        URL url = ConfigUtil.class.getResource("/");
         path = url.getFile() + "config/service.properties";
         //fileSize = new File(path).length();
         oldModifyDate = new File(path).lastModified();
@@ -139,7 +139,7 @@ public class ServiceConfigUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(ServiceConfigUtil.getMapString());
+        System.out.println(ConfigUtil.getMapString());
         System.out.println(oldModifyDate);
     }
 

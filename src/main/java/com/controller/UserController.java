@@ -1,7 +1,7 @@
 package com.controller;
 
 import com.service.UserService;
-import com.utils.ServiceConfigUtil;
+import com.utils.ConfigUtil;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class UserController {
     public String register(String userName, String password) {
         userService.register(userName, password);
         log.info("userName = " + userName + " add success!");
-        System.out.println(ServiceConfigUtil.getValue("configFileTest"));
+        System.out.println(ConfigUtil.getValue("configFileTest"));
         return "success";
     }
 
