@@ -41,6 +41,26 @@
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
 
+  <!--登录拦截-->
+  <filter>
+    <filter-name>InviteLinkFilter</filter-name>
+    <filter-class>com.utils.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>InviteLinkFilter</filter-name>
+    <url-pattern>/test/*</url-pattern>
+  </filter-mapping>
+
+  <!-- 用来监控session的创建和销毁 -->
+  <listener>
+    <listener-class>com.utils.filter.SessionFilter</listener-class>
+  </listener>
+
+  <!-- 用来配置session 的超时时间，单位分钟 -->
+  <session-config>
+    <session-timeout>120</session-timeout>
+  </session-config>
+
   <welcome-file-list>
     <welcome-file>/WEB-INF/views/login.jsp</welcome-file>
   </welcome-file-list>

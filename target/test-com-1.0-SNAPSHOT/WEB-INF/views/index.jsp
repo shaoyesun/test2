@@ -4,9 +4,9 @@
 </head>
 <body onload="findAll()">
 <form action="/user/register" method="post" id="form1">
-    name:<input type="text" name="userName" id="name"><br><br>
+    name:<input type="text" name="userName" id="name">${message}<br><br>
     pass:<input type="text" name="password" id="pass"><br><br>
-    <input type="button" value="add" onclick="add()">
+    <input type="button" value="add" onclick="add()">${now_user.userName}
 </form>
 &nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()">
 <div id="alluser"></div>

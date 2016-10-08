@@ -20,11 +20,14 @@ public class UserService {
     @Inject
     private UserDao userDao;
 
-    public void register(String userName, String password) {
+    public String register(String userName, String password) {
+        User u = userDao.findByUserName(userName);
+        if (u != null) return "existed";
         User user = new User();
         user.setUserName(userName);
         user.setPassword(password);
         userDao.save(user);
+        return "success";
     }
 
     public List<User> findAll() {
@@ -44,15 +47,19 @@ public class UserService {
         return "edit success";
     }
 
-    public String login(String userName, String password){
+    public String login(String userName, String password) {
         User user = userDao.findByUserName(userName);
-        if(user == null){
+        if (user == null) {
             return "not exist";
         }
-        if(user.getPassword().equals(password)){
+        if (!user.getPassword().equals(password)) {
             return "password fail";
         }
         return "success";
+    }
+
+    public User findByUserName(String userName) {
+        return userDao.findByUserName(userName);
     }
 
 }
