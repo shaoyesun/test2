@@ -44,4 +44,15 @@ public class UserService {
         return "edit success";
     }
 
+    public String login(String userName, String password){
+        User user = userDao.findByUserName(userName);
+        if(user == null){
+            return "not exist";
+        }
+        if(user.getPassword().equals(password)){
+            return "password fail";
+        }
+        return "success";
+    }
+
 }

@@ -24,9 +24,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/toLogin")
+    public String toLogin() {
+        return "login";
+    }
+
     @RequestMapping(value = "/login")
-    public String login() {
-        return "success";
+    public String login(String userName, String password) {
+        String result = userService.login(userName, password);
+        if (result.equals("success")) {
+            return "index";
+        }
+        return "index";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <%--<meta http-equiv="refresh" content="0;url=<t:contextpath/>/user/toLogin">--%>
+    <%--<meta http-equiv="refresh" content="0;url=/test1">--%>
 </head>
 <body onload="findAll()">
 <form action="/user/register" method="post" id="form1">
