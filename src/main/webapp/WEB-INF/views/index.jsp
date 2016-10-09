@@ -1,3 +1,4 @@
+<!--国际化-->
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
@@ -12,7 +13,8 @@
 <h1>---------------------------------------------------------</h1>
 &nbsp;&nbsp;<a href="/user/loginOut">login out</a><br><br>
 <h1>---------------------------------------------------------</h1>
-&nbsp;&nbsp;<spring:message code="internationalization.test"/><br>
+&nbsp;&nbsp;<a href="/user/changeLocal?locale=zh_CN"><spring:message code="Chinese"/></a>&nbsp;&nbsp;
+&nbsp;&nbsp;<a href="/user/changeLocal?locale=en_US"><spring:message code="English"/></a> <br>
 <h1>---------------------------------------------------------</h1>
 &nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()"><br>
 <div id="alluser"></div>
