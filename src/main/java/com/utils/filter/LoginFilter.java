@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
             if (session.getAttribute("invite_link") == null) {
                 session.setAttribute("invite_link", requestUrl);
             }
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/user/toLogin");
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/other/toLogin");
             //chain.doFilter(request, response);
         } else {
             httpResponse.sendRedirect(requestUrl);

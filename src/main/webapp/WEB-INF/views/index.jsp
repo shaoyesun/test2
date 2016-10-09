@@ -6,8 +6,9 @@
 <form action="/user/register" method="post" id="form1">
     name:<input type="text" name="userName" id="name">${message}<br><br>
     pass:<input type="text" name="password" id="pass"><br><br>
-    <input type="button" value="add" onclick="add()">${now_user.userName}
+    <input type="button" value="add" onclick="add()">${now_user.userName}<br><br>
 </form>
+&nbsp;&nbsp;<a href="/user/loginOut">login out</a><br><br>
 &nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()">
 <div id="alluser"></div>
 <div id="edituser"></div>

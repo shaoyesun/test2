@@ -5,6 +5,7 @@ import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,7 @@ public class OtherController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String userName, String password, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         String result = userService.login(userName, password);
         if (result.equals("success")) {
@@ -51,7 +52,7 @@ public class OtherController {
             return "index";
         }
         redirectAttributes.addFlashAttribute("message", result);
-        return "redirect:/user/toLogin";
+        return "redirect:/other/toLogin";
     }
 
 }

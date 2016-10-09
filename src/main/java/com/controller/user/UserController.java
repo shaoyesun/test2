@@ -4,6 +4,7 @@ import com.service.UserService;
 import com.utils.ConfigUtil;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by root on 16-9-28.
@@ -61,6 +65,15 @@ public class UserController {
     @RequestMapping(value = "/testFilter")
     public String testFilter() {
         return "success";
+    }
+
+    @RequestMapping(value = "/loginOut")
+    public String loginOut(HttpServletRequest request) {
+        /*SecurityUtils.getSubject().getSession().stop();
+        SecurityUtils.getSubject().logout();*/
+        HttpSession session1 = request.getSession();
+        session1.invalidate();
+        return "redirect:/other/toLogin";
     }
 
 }
