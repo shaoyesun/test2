@@ -40,6 +40,8 @@ public class UserService {
     }
 
     public String update(Long id, String userName, String password) {
+        User u = userDao.findByUserName(userName);
+        if (u != null) return "existed";
         User user = userDao.findById(id);
         if (user == null) return "user not exist";
         user.setUserName(userName);

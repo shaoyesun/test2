@@ -10,12 +10,12 @@
     pass:<input type="text" name="password" id="pass"><br><br>
     <input type="button" value="add" onclick="add()">${now_user.userName}<br><br>
 </form>
-<h1>---------------------------------------------------------</h1>
+<h5>---------------------------<spring:message code="exit"/>------------------------------</h5>
 &nbsp;&nbsp;<a href="/user/loginOut">login out</a><br><br>
-<h1>---------------------------------------------------------</h1>
+<h5>--------------------------<spring:message code="internationalization"/>-------------------------------</h5>
 &nbsp;&nbsp;<a href="/user/changeLocal?locale=zh_CN"><spring:message code="Chinese"/></a>&nbsp;&nbsp;
 &nbsp;&nbsp;<a href="/user/changeLocal?locale=en_US"><spring:message code="English"/></a> <br>
-<h1>---------------------------------------------------------</h1>
+<h5>-------------------------<spring:message code="findAll"/>--------------------------------</h5>
 &nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()"><br>
 <div id="alluser"></div>
 <div id="edituser"></div>
@@ -33,7 +33,7 @@
             findAll();
         }
     }
-    
+
     function findAll(){
         $.ajax({
            type: "POST",
@@ -66,8 +66,8 @@
 
     function editShow(id, userName, password){
         $("#edituser").html("");
-        var str = "<br><h1>---------------------------------------------------------</h1>"+
-                  "name:<input type=\"text\" name=\"userName\" id=\"userName\" value="+ userName +"><br><br>"+
+        var str = "<br><h5>---------------------------<spring:message code="edit"/>------------------------------</h5>"+
+                  "name:<input type=\"text\" name=\"userName\" id=\"userName\" value="+ userName +"><label id=\"exist\"></label><br><br>"+
                   "pass:<input type=\"text\" name=\"password\" id=\"password\"  value="+ password +"><br><br>"+
                   "<input type=\"button\" value=\"edit\" onclick=\"edit("+id+")\">";
         $("#edituser").html(str);
@@ -84,9 +84,14 @@
                data:{id: id, userName:userName, password:password},
                url: "/user/edit",
                success: function (data) {
-                   alert(data);
-                   $("#edituser").html("");
-                   findAll();
+                   if(data == "existed"){
+                       $("#exist").html("existed");
+                   }else{
+                       $("#exist").html("");
+                       alert(data);
+                       $("#edituser").html("");
+                       findAll();
+                   }
                }
            });
         }
