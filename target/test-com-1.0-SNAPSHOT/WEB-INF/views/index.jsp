@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <%--<meta http-equiv="refresh" content="0;url=/test1">--%>
@@ -8,8 +9,12 @@
     pass:<input type="text" name="password" id="pass"><br><br>
     <input type="button" value="add" onclick="add()">${now_user.userName}<br><br>
 </form>
+<h1>---------------------------------------------------------</h1>
 &nbsp;&nbsp;<a href="/user/loginOut">login out</a><br><br>
-&nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()">
+<h1>---------------------------------------------------------</h1>
+&nbsp;&nbsp;<spring:message code="internationalization.test"/><br>
+<h1>---------------------------------------------------------</h1>
+&nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()"><br>
 <div id="alluser"></div>
 <div id="edituser"></div>
 
@@ -33,7 +38,7 @@
            url: "/user/findAll",
            success: function (data) {
                $("#alluser").html("");
-               var str = "<br><h1>---------------------------------------------------------</h1>";
+               var str = "";
                $.each(data, function (index, item) {
                     str += "<table><tr><td>"+item.userName+"</td>"+
                            "<td>"+item.password+"</td>"+

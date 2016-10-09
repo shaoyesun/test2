@@ -11,10 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -74,6 +78,27 @@ public class UserController {
         HttpSession session1 = request.getSession();
         session1.invalidate();
         return "redirect:/other/toLogin";
+    }
+
+    private SessionLocaleResolver sessionLocaleResolver;
+
+    @RequestMapping("language")
+    public ModelAndView language(HttpServletRequest request, HttpServletResponse response, String language){
+
+        language=language.toLowerCase();
+        if(language==null||language.equals("")){
+            return new ModelAndView("redirect:/");
+        }else{
+            if(language.equals("zh_cn")){
+                sessionLocaleResolver.setLocale(request, response, Locale.CHINA );
+            }else if(language.equals("en")){
+                sessionLocaleResolver.setLocale(request, response, Locale.ENGLISH );
+            }else{
+                sessionLocaleResolver.setLocale(request, response, Locale.CHINA );
+            }
+        }
+
+        return new ModelAndView("redirect:/");
     }
 
 }
