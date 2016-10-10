@@ -14,7 +14,7 @@
 &nbsp;&nbsp;<a href="/user/loginOut">login out</a><br><br>
 <h5>--------------------------<spring:message code="internationalization"/>-------------------------------</h5>
 &nbsp;&nbsp;<a href="/user/changeLocal?locale=zh_CN"><spring:message code="Chinese"/></a>&nbsp;&nbsp;
-&nbsp;&nbsp;<a href="/user/changeLocal?locale=en_US"><spring:message code="English"/></a> <br>
+&nbsp;&nbsp;<a href="/user/changeLocal?locale=en_US"><spring:message code="English"/></a> <br>糯米
 <h5>-------------------------<spring:message code="findAll"/>--------------------------------</h5>
 &nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()"><br>
 <div id="alluser"></div>

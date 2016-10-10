@@ -1,6 +1,8 @@
 package com.controller.other;
 
 import com.service.UserService;
+import com.service.security.TokenService;
+import com.service.security.UserAuthenticationToken;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class OtherController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 跳转到登录页面
@@ -44,6 +48,12 @@ public class OtherController {
         String result = userService.login(userName, password);
         if (result.equals("success")) {
             request.getSession().setAttribute("now_user", userService.findByUserName(userName));
+
+            String jwtToken = tokenService.createUserAuthToken(userService.findByUserName(userName));//生成token
+            System.out.println(jwtToken);
+            UserAuthenticationToken authToken = tokenService.retrieveUserAuthToken(jwtToken);//token解析
+            System.out.println(authToken.isAuthenticated());
+
             Object url = request.getSession().getAttribute("invite_link");
             if (url != null) {
                 request.getSession().removeAttribute("invite_link");

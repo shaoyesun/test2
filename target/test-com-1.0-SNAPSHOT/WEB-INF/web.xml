@@ -28,7 +28,7 @@
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
+    <param-value>classpath:applicationContext*.xml</param-value>
   </context-param>
 
   <!-- log4j 日志输出文件配置 -->
