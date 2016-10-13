@@ -53,6 +53,7 @@ public class OtherController {
             System.out.println(jwtToken);
             UserAuthenticationToken authToken = tokenService.retrieveUserAuthToken(jwtToken);//token解析
             System.out.println(authToken.isAuthenticated());
+            System.out.println("id = " + UserAuthenticationToken.getCurrentToken().getUserUuid());
 
             Object url = request.getSession().getAttribute("invite_link");
             if (url != null) {

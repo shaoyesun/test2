@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,8 @@ public class TokenService {
         }
 
         String jwtToken = JwtHelper.encode(content, signerProvider.getSigner()).getEncoded();
+        UserAuthenticationToken authToken = retrieveUserAuthToken(jwtToken);
+        SecurityContextHolder.getContext().setAuthentication(authToken);
         return jwtToken;
     }
 

@@ -3,7 +3,10 @@ package com.service.security;
 import com.google.common.base.Preconditions;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.Assert;
 
 import java.util.Collection;
 import java.util.Map;
@@ -62,5 +65,14 @@ public class UserAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(false);
     }
 
+    public static UserAuthenticationToken getCurrentToken() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Assert.isInstanceOf(UserAuthenticationToken.class, authentication, "Invalid authentication");
+        return (UserAuthenticationToken) authentication;
+    }
+
+    public String getUserUuid() {
+        return userUuid;
+    }
 
 }
