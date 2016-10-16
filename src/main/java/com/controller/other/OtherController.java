@@ -1,7 +1,7 @@
 package com.controller.other;
 
-import com.entity.User;
 import com.service.UserService;
+import com.service.limitelogin.LimiteLogin;
 import com.service.token.TokenService;
 import com.service.token.UserAuthenticationToken;
 
@@ -24,6 +24,8 @@ public class OtherController {
     private UserService userService;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private LimiteLogin limiteLogin;
 
     /**
      * 跳转到登录页面
@@ -47,14 +49,12 @@ public class OtherController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String userName, String password, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         String result = userService.login(userName, password);
-
-        /*User user =  (User)request.getSession().getAttribute("now_user");
-        if(user != null){
-            System.out.println("user have existed : " + user.getId() + " | " + user.getUserName());
+        String loginLimite = limiteLogin.loginLimite(request, userName);
+        if(loginLimite.equals("logged")){
+            redirectAttributes.addFlashAttribute("message", loginLimite);
+            redirectAttributes.addFlashAttribute("userName", userName);
             return "redirect:/other/toLogin";
-        }*/
-        String sessionId = request.getSession().getId();
-        System.out.println("sessionId = " + sessionId);
+        }
 
         if (result.equals("success")) {
             request.getSession().setAttribute("now_user", userService.findByUserName(userName));

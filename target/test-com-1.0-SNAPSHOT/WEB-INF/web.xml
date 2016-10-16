@@ -69,9 +69,14 @@
     <url-pattern>/test/*</url-pattern>
   </filter-mapping>
 
+  <!-- session listener 退出清除session信息的同时清除application中存放用户登录信息-->
+  <listener>
+    <listener-class>com.service.limitelogin.SessionListener</listener-class>
+  </listener>
+
   <!-- 用来配置session 的超时时间，单位分钟 -->
   <!--<session-config>
-    <session-timeout>120</session-timeout>
+    <session-timeout>10</session-timeout>
   </session-config>-->
 
   <welcome-file-list>

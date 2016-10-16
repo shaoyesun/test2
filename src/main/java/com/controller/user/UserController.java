@@ -14,6 +14,7 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,6 +62,17 @@ public class UserController {
     public String edit(Long id, String userName, String password) {
         log.info("id = " + id + ", userName = " + userName + " edit success!");
         return userService.update(id, userName, password);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/clearUserSession", method = RequestMethod.POST)
+    public String clearUserSession(HttpServletRequest request, String userName) {
+        HttpSession httpSession = request.getSession();
+        Map<String, String> loginUserMap = (Map<String, String>) httpSession.getServletContext().getAttribute("loginUserMap");
+        httpSession.removeAttribute(loginUserMap.get(userName));
+        loginUserMap.remove(userName);
+        httpSession.getServletContext().setAttribute("loginUserMap", loginUserMap);
+        return "success";
     }
 
     @ResponseBody

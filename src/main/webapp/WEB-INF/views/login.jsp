@@ -10,11 +10,32 @@
 <head>
     <title>Login</title>
 </head>
-<body>
+<body onload="reLogin()">
     <form action="/other/login" method="post">
         user name:<input type="text" name="userName">${message}<br><br>
         user pass:<input type="text" name="password"><br><br>
         <input type="submit" value="Login">
     </form>
+
+<script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    function reLogin(){
+        if(${userName} != ""){
+            //alert(${userName});
+            if(confirm('帐号已在别处登录，确认要重新登录吗？')){
+                $.ajax({
+                    type: "POST",
+                    data:{userName: ${userName}},
+                    url: "/user/clearUserSession",
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            }/*else{
+                alert("取消");
+            }*/
+        }
+    }
+</script>
 </body>
 </html>
