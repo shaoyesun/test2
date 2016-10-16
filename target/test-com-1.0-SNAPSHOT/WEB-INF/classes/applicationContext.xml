@@ -15,7 +15,7 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
-	<bean id="signerProvider" class="com.service.security.SignerProvider"></bean>
+	<bean id="signerProvider" class="com.service.token.SignerProvider"></bean>
 
 	<!-- 配置数据源 -->
 	<context:property-placeholder location="classpath:config/jdbc.properties"/>
