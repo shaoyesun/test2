@@ -74,7 +74,6 @@ public class UserController {
         //httpSession.invalidate();
         loginUserMap.remove(userName);
         httpSession.getServletContext().setAttribute("loginUserMap", loginUserMap);
-
         return "redirect:/other/toLogin";
     }
 
