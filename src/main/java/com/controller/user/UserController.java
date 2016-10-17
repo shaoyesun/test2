@@ -65,16 +65,17 @@ public class UserController {
         return userService.update(id, userName, password);
     }
 
+    @ResponseBody
     @RequestMapping(value = "/clearUserSession")
     public String clearUserSession(HttpServletRequest request, String userName) {
         HttpSession httpSession = request.getSession();
         Map<String, String> loginUserMap = (Map<String, String>) httpSession.getServletContext().getAttribute("loginUserMap");
         String s = loginUserMap.get(userName);
-        httpSession.removeAttribute(loginUserMap.get(userName));
+        httpSession.removeAttribute(userName);
         //httpSession.invalidate();
         loginUserMap.remove(userName);
         httpSession.getServletContext().setAttribute("loginUserMap", loginUserMap);
-        return "redirect:/other/toLogin";
+        return "success";
     }
 
     @ResponseBody

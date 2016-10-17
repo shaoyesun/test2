@@ -48,6 +48,7 @@ public class OtherController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String userName, String password, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        sessionInfo(request);//打印session信息
         String result = userService.login(userName, password);
         String loginLimite = limiteLogin.loginLimite(request, userName);
         if(loginLimite.equals("logged")){
@@ -72,8 +73,19 @@ public class OtherController {
             }
             return "index";
         }
+        System.out.println("-----------------------------------------------------------------");
+        sessionInfo(request);//打印session信息
         redirectAttributes.addFlashAttribute("message", result);
         return "redirect:/other/toLogin";
+    }
+
+    private void sessionInfo(HttpServletRequest request){
+        java.util.Enumeration e = request.getSession().getAttributeNames();
+        while( e.hasMoreElements()) {
+            String sessionName=(String)e.nextElement();
+            System.out.println("\nsession item name="+sessionName);
+            System.out.println("\nsession item value="+request.getSession().getAttribute(sessionName));
+        }
     }
 
 }

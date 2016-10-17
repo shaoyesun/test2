@@ -23,15 +23,15 @@
     function reLogin(){
         var un = $("#un").val();
         if(un != ""){
-            if(window.confirm('帐号已在别处登录，确认要重新登录吗？')){
+            if(confirm('帐号已在别处登录，确认要重新登录吗？')){
                 $.ajax({
-                    type: "POST",
-                    data:{userName: un},
-                    url: "/user/clearUserSession",
-                    success: function (data) {
-                        alert(data);
-                    }
-                });
+                   type: "POST",
+                   data:{userName: un},
+                   url: "/user/clearUserSession",
+                   success: function (data) {
+                       alert(data);
+                   }
+               });
             }
         }
     }

@@ -29,6 +29,7 @@ public class LimiteLogin {
         String sessionId = request.getSession().getId();
         for (String key : loginUserMap.keySet()) {
             //判断是否已经保存该登录用户的信息或者如果是同一个用户进行重复登录那么允许登录
+            //if (!key.equals(user.getUserName()) || loginUserMap.containsValue(sessionId)) {
             if (!key.equals(user.getUserName())) {
                 continue;
             }
