@@ -1,5 +1,6 @@
 package com.controller.user;
 
+import com.entity.User;
 import com.service.UserService;
 import com.utils.ConfigUtil;
 
@@ -64,15 +65,17 @@ public class UserController {
         return userService.update(id, userName, password);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/clearUserSession", method = RequestMethod.POST)
+    @RequestMapping(value = "/clearUserSession")
     public String clearUserSession(HttpServletRequest request, String userName) {
         HttpSession httpSession = request.getSession();
         Map<String, String> loginUserMap = (Map<String, String>) httpSession.getServletContext().getAttribute("loginUserMap");
+        String s = loginUserMap.get(userName);
         httpSession.removeAttribute(loginUserMap.get(userName));
+        //httpSession.invalidate();
         loginUserMap.remove(userName);
         httpSession.getServletContext().setAttribute("loginUserMap", loginUserMap);
-        return "success";
+
+        return "redirect:/other/toLogin";
     }
 
     @ResponseBody
@@ -95,6 +98,8 @@ public class UserController {
 
     @RequestMapping(value = "/changeLocal")
     public String changeLocal(HttpServletRequest request,String locale,HttpServletResponse response){
+        User user = (User)request.getSession().getAttribute("now_user");
+        String s = user.getUserName();
         Locale l = new Locale(locale);
         localeResolver.setLocale(request, response, l);
         return "index";
