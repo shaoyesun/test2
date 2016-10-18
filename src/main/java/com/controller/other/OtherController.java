@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by root on 16-9-28.
@@ -51,7 +53,7 @@ public class OtherController {
         sessionInfo(request);//打印session信息
         String result = userService.login(userName, password);
         String loginLimite = limiteLogin.loginLimite(request, userName);
-        if(loginLimite.equals("logged")){
+        if (loginLimite.equals("logged")) {
             redirectAttributes.addFlashAttribute("message", loginLimite);
             redirectAttributes.addFlashAttribute("userName", userName);
             return "redirect:/other/toLogin";
@@ -79,13 +81,27 @@ public class OtherController {
         return "redirect:/other/toLogin";
     }
 
-    private void sessionInfo(HttpServletRequest request){
+    private void sessionInfo(HttpServletRequest request) {
         java.util.Enumeration e = request.getSession().getAttributeNames();
-        while( e.hasMoreElements()) {
-            String sessionName=(String)e.nextElement();
-            System.out.println("\nsession item name="+sessionName);
-            System.out.println("\nsession item value="+request.getSession().getAttribute(sessionName));
+        while (e.hasMoreElements()) {
+            String sessionName = (String) e.nextElement();
+            System.out.println("\nsession item name=" + sessionName);
+            System.out.println("\nsession item value=" + request.getSession().getAttribute(sessionName));
         }
+    }
+
+    /**
+     * 多用户登录限制,清除session信息(登录信息、提示信息)
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/clearUserSession")
+    public String clearUserSession(HttpServletRequest request) {
+        HttpSession httpSession = request.getSession();
+        httpSession.invalidate();
+        return "success";
     }
 
 }

@@ -74,7 +74,7 @@
     <session-timeout>10</session-timeout>
   </session-config>
 
-  <!-- session listener 退出清除session信息的同时清除application中存放用户登录信息-->
+  <!-- session listener 多用户登录限制,退出清除session信息的同时清除application中存放用户登录信息-->
   <listener>
     <listener-class>com.service.limitelogin.SessionListener</listener-class>
   </listener>

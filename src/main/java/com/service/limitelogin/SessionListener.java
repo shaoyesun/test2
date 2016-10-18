@@ -26,11 +26,12 @@ public class SessionListener implements HttpSessionListener {
     public void sessionDestroyed(HttpSessionEvent event) {
         HttpSession session = event.getSession();
         String sessionId = session.getId();
-        //在session销毁的时候 把loginUserMap中保存的键值对清除
+        //在session销毁的时候,把loginUserMap中保存的键值对清除
         User user = (User) session.getAttribute("now_user");
         if (user != null) {
             Map<String, String> loginUserMap = (Map<String, String>) event.getSession().getServletContext().getAttribute("loginUserMap");
             if(loginUserMap.get(user.getUserName()).equals(sessionId)){
+                log.info("clean user from application : " + user.getUserName());
                 loginUserMap.remove(user.getUserName());
                 event.getSession().getServletContext().setAttribute("loginUserMap", loginUserMap);
             }

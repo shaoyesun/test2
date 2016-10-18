@@ -27,6 +27,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
 
+        //多用户登录限制判断,并给出提示信息
         boolean isLogin = false;
         if (user != null) {
             Map<String, String> loginUserMap = (Map<String, String>) session.getServletContext().getAttribute("loginUserMap");
@@ -40,7 +41,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             }
         }
         if(isLogin){
-            session.setAttribute("message", "用户："+user.getUserName()+"，已在别处登录!");
+            session.setAttribute("mess", "用户："+user.getUserName()+"，已在别处登录!");
             response.sendRedirect(request.getContextPath() + "/other/toLogin");
             return false;
         }
