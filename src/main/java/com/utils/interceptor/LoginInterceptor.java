@@ -21,7 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("now_user");
+        User user = (User) session.getAttribute("now_user");
         if (session.getAttribute("now_user") == null) {
             response.sendRedirect(request.getContextPath() + "/other/toLogin");
             return false;
@@ -40,8 +40,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 }
             }
         }
-        if(isLogin){
-            session.setAttribute("mess", "用户："+user.getUserName()+"，已在别处登录!");
+        if (isLogin) {
+            Map<String, String> loginOutTime = (Map<String, String>) session.getServletContext().getAttribute("loginOutTime");
+            session.setAttribute("mess", "用户：" + user.getUserName() + "，于 " + loginOutTime.get(user.getUserName()) + " 已在别处登录!");
+            loginOutTime.remove(user.getUserName());
+            session.getServletContext().setAttribute("loginUserMap", loginOutTime);
             response.sendRedirect(request.getContextPath() + "/other/toLogin");
             return false;
         }
