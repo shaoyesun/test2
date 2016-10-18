@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -23,12 +24,16 @@ public class SessionListener implements HttpSessionListener {
 
     @Override
     public void sessionDestroyed(HttpSessionEvent event) {
+        HttpSession session = event.getSession();
+        String sessionId = session.getId();
         //在session销毁的时候 把loginUserMap中保存的键值对清除
-        User user = (User) event.getSession().getAttribute("now_user");
+        User user = (User) session.getAttribute("now_user");
         if (user != null) {
             Map<String, String> loginUserMap = (Map<String, String>) event.getSession().getServletContext().getAttribute("loginUserMap");
-            loginUserMap.remove(user.getUserName());
-            event.getSession().getServletContext().setAttribute("loginUserMap", loginUserMap);
+            if(loginUserMap.get(user.getUserName()).equals(sessionId)){
+                loginUserMap.remove(user.getUserName());
+                event.getSession().getServletContext().setAttribute("loginUserMap", loginUserMap);
+            }
         }
 
     }

@@ -25,25 +25,20 @@ public class LimiteLogin {
 
     public String loginLimite(HttpServletRequest request, String userName) {
         User user = userService.findByUserName(userName);
-        boolean isExist = false;
         String sessionId = request.getSession().getId();
         for (String key : loginUserMap.keySet()) {
-            //判断是否已经保存该登录用户的信息或者如果是同一个用户进行重复登录那么允许登录
-            //if (!key.equals(user.getUserName()) || loginUserMap.containsValue(sessionId)) {
-            if (!key.equals(user.getUserName())) {
-                continue;
+            //用户已在另一处登录
+            if (key.equals(user.getUserName()) && !loginUserMap.containsValue(sessionId)) {
+                loginUserMap.remove(user.getUserName());
+                break;
             }
-            isExist = true;
-            break;
         }
 
-        if (isExist) {
-            return "logged";
-        } else {
-            loginUserMap.put(user.getUserName(), sessionId);
-        }
+        loginUserMap.put(user.getUserName(), sessionId);
         request.getSession().getServletContext().setAttribute("loginUserMap", loginUserMap);
+        System.out.println("sessionId = " + loginUserMap.get(userName));
         return "success";
     }
+
 
 }
