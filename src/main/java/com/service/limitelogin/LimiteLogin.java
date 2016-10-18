@@ -4,6 +4,7 @@ import com.entity.User;
 import com.service.UserService;
 import com.utils.DateUtil;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 @Transactional
 public class LimiteLogin {
 
+    private static Logger log = Logger.getLogger(SessionListener.class);
+
     private static Map<String, String> loginUserMap = new HashMap<>();//存储在线用户
     private static Map<String, String> loginOutTime = new HashMap<>();//存储剔除用户时间
     @Autowired
@@ -32,6 +35,7 @@ public class LimiteLogin {
         for (String key : loginUserMap.keySet()) {
             //用户已在另一处登录
             if (key.equals(user.getUserName()) && !loginUserMap.containsValue(sessionId)) {
+                log.info("用户：" + user.getUserName() + "，于" + DateUtil.dateFormat(new Date(), "yyyy-MM-dd HH:mm:ss") + "被剔除！");
                 loginOutTime.put(user.getUserName(), DateUtil.dateFormat(new Date(), "yyyy-MM-dd HH:mm:ss"));
                 loginUserMap.remove(user.getUserName());
                 break;
@@ -41,7 +45,6 @@ public class LimiteLogin {
         loginUserMap.put(user.getUserName(), sessionId);
         request.getSession().getServletContext().setAttribute("loginUserMap", loginUserMap);
         request.getSession().getServletContext().setAttribute("loginOutTime", loginOutTime);
-        System.out.println("sessionId = " + loginUserMap.get(userName));
         return "success";
     }
 
