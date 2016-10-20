@@ -1,6 +1,7 @@
+<%@ taglib uri="path_tag" prefix="path" %>
 <html>
 <head>
-    <%--<meta http-equiv="refresh" content="0;url=<t:contextpath/>/user/toLogin">--%>
+    <meta http-equiv="refresh" content="0;url=<path:contextpath/>/other/toLogin">
 </head>
 <body onload="findAll()">
 <form action="/user/register" method="post" id="form1">
