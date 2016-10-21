@@ -19,7 +19,8 @@
 &nbsp;&nbsp;<input type="button" value="findAll" onclick="findAll()"><br>
 <div id="alluser"></div>
 <div id="edituser"></div>
-
+<h5>----------------------------------save log--------------------------------</h5>
+<input type="button" value="Save Log" onclick="saveLog()"><span id="log"></span>
 <script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
 <script>
     function add() {
@@ -95,10 +96,17 @@
                }
            });
         }
-
-
     }
 
+    function saveLog(){
+        $.ajax({
+            type: "POST",
+            url: "/log/saveLog",
+            success: function (data) {
+                $("#log").html(data);
+            }
+        });
+    }
 </script>
 </body>
 </html>

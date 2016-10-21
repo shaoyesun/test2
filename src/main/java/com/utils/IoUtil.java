@@ -27,8 +27,8 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
 public class IoUtil {
-    private static Logger log = Logger.getLogger(IoUtil.class);
 
+    private static Logger log = Logger.getLogger(IoUtil.class);
 
     /**
      * 读取二进制文件

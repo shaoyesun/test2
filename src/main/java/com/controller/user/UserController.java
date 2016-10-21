@@ -3,6 +3,7 @@ package com.controller.user;
 import com.entity.User;
 import com.service.UserService;
 import com.utils.ConfigUtil;
+import com.utils.annotation.Log;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +74,6 @@ public class UserController {
 
     @RequestMapping(value = "/loginOut")
     public String loginOut(HttpServletRequest request) {
-        /*SecurityUtils.getSubject().getSession().stop();
-        SecurityUtils.getSubject().logout();*/
         HttpSession session1 = request.getSession();
         session1.invalidate();
         return "redirect:/other/toLogin";
@@ -83,10 +82,10 @@ public class UserController {
     @Autowired
     private LocaleResolver localeResolver;
 
+    @Log(desc = "中英文切换")
     @RequestMapping(value = "/changeLocal")
     public String changeLocal(HttpServletRequest request,String locale,HttpServletResponse response){
         User user = (User)request.getSession().getAttribute("now_user");
-        String s = user.getUserName();
         Locale l = new Locale(locale);
         localeResolver.setLocale(request, response, l);
         return "index";

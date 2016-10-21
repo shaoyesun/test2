@@ -31,7 +31,6 @@ public class ConfigUtil {
     private static void init() {
         URL url = ConfigUtil.class.getResource("/");
         path = url.getFile() + "config/service.properties";
-        //fileSize = new File(path).length();
         oldModifyDate = new File(path).lastModified();
         try {
             String configString = readCharacterFile(path);

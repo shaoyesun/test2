@@ -54,4 +54,25 @@ public class BaseDao<T, PK extends Long> {
         getSession().update(t);
     }
 
+    /**
+     * 批量保存数据到数据库
+     *
+     * @param list
+     * @param max
+     */
+    public void batchSave(List<T> list, int max) {
+        log.info("插入文件的长度为：" + list.size());
+        if (max <= 0) {
+            max = 100;
+        }
+        Session session = sessionFactory.getCurrentSession();
+        for (int i = 0; i < list.size(); i++) {
+            session.save(list.get(i));
+            if (i % max == 0) {
+                session.flush();
+                session.clear();
+            }
+        }
+    }
+
 }
