@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 使用拦截器对系统进行日志记录并保存到数据库
- *
- * @author liuzm
  */
 public class LogInterceptor extends HandlerInterceptorAdapter {
 
