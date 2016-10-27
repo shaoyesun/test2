@@ -44,11 +44,13 @@ public class WebSocketHander implements WebSocketHandler {
             webSocketSession.close();
         }
         logger.debug("链接出错，关闭链接......");
+        count--;
         users.remove(webSocketSession);
     }
 
     public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
         logger.debug("链接关闭......" + closeStatus.toString());
+        count--;
         users.remove(webSocketSession);
     }
 
