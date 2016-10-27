@@ -6,7 +6,7 @@ import java.util.Vector;
  * 用户行为跟踪管理器
  */
 public class LogManage {
-    private static Vector<LogModel> vector = new Vector<>();
+    private static Vector<LogModel> vector = new Vector<LogModel>();
     private static LogManage log = null;
 
     private LogManage() {
@@ -26,7 +26,7 @@ public class LogManage {
 
     public Vector<LogModel> getLog() {
         Vector<LogModel> v = vector;
-        vector = new Vector<>();
+        vector = new Vector<LogModel>();
         return v;
     }
 

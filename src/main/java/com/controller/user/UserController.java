@@ -91,4 +91,14 @@ public class UserController {
         return "index";
     }
 
+    @RequestMapping(value = "/websocket")
+    public String websocket() {
+        return "websocket";
+    }
+
+    @RequestMapping(value = "/websocket1")
+    public String websocket1() {
+        return "websocket1";
+    }
+
 }

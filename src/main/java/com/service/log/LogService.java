@@ -27,7 +27,7 @@ public class LogService {
     public void save() {
         LogManage lm = LogManage.getInstance();
         Vector<LogModel> vector = lm.getLog();
-        Vector<Log> v = new Vector<>();
+        Vector<Log> v = new Vector<Log>();
         for (LogModel logModel : vector) {
             Log ul = new Log();
             ul.setCreateDate(logModel.getCreateDate());

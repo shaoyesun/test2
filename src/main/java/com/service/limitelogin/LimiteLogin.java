@@ -24,8 +24,8 @@ public class LimiteLogin {
 
     private static Logger log = Logger.getLogger(SessionListener.class);
 
-    private static Map<String, String> loginUserMap = new HashMap<>();//存储在线用户
-    private static Map<String, String> loginOutTime = new HashMap<>();//存储剔除用户时间
+    private static Map<String, String> loginUserMap = new HashMap<String, String>();//存储在线用户
+    private static Map<String, String> loginOutTime = new HashMap<String, String>();//存储剔除用户时间
     @Autowired
     private UserService userService;
 

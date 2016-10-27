@@ -82,7 +82,7 @@ public class TokenService {
     }
 
     private Set<String> authorityListToSet(Collection<? extends GrantedAuthority> authorities) {
-        Set<String> set = new HashSet<>();
+        Set<String> set = new HashSet<String>();
         for (GrantedAuthority authority : authorities) {
             set.add(authority.getAuthority());
         }
