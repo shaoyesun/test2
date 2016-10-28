@@ -75,8 +75,8 @@
       </span>
     </div><!-- /input-group -->
 </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-<button class="btn btn-default" type="button" onclick="mess()">发送</button>
+</div><!-- /.row --><br><br>
+后台主动发送消息：<button class="btn btn-default" type="button" onclick="mess()">发送</button>
 <script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
 <script>
 function mess() {
