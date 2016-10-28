@@ -7,6 +7,7 @@ import com.utils.annotation.Log;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.LocaleResolver;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -34,6 +37,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 添加新的用户
+     *
+     * @param userName
+     * @param password
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(String userName, String password, Model model) {
         String result = userService.register(userName, password);
@@ -46,12 +57,23 @@ public class UserController {
         return "index";
     }
 
+    /**
+     * 获取所有用户
+     *
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/findAll")
     public List findAll() {
         return userService.findAll();
     }
 
+    /**
+     * 删除指定用户
+     *
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     public String del(Long id) {
@@ -59,6 +81,14 @@ public class UserController {
         return userService.del(id);
     }
 
+    /**
+     * 编辑指定用户信息
+     *
+     * @param id
+     * @param userName
+     * @param password
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String edit(Long id, String userName, String password) {
@@ -72,6 +102,12 @@ public class UserController {
         return "success";
     }
 
+    /**
+     * 退出登录
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/loginOut")
     public String loginOut(HttpServletRequest request) {
         HttpSession session1 = request.getSession();
@@ -84,21 +120,11 @@ public class UserController {
 
     @Log(desc = "中英文切换")
     @RequestMapping(value = "/changeLocal")
-    public String changeLocal(HttpServletRequest request,String locale,HttpServletResponse response){
-        User user = (User)request.getSession().getAttribute("now_user");
+    public String changeLocal(HttpServletRequest request, String locale, HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute("now_user");
         Locale l = new Locale(locale);
         localeResolver.setLocale(request, response, l);
         return "index";
-    }
-
-    @RequestMapping(value = "/websocket")
-    public String websocket() {
-        return "websocket";
-    }
-
-    @RequestMapping(value = "/websocket1")
-    public String websocket1() {
-        return "websocket1";
     }
 
 }

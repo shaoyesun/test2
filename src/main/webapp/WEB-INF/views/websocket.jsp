@@ -24,7 +24,7 @@
             var websocket;
             if ('WebSocket' in window) {
                 alert("WebSocket");
-                websocket = new WebSocket("ws://192.168.8.28:8070/echo");
+                websocket = new WebSocket("ws://192.168.8.28:8070/echo");//需要与地址栏中地址保持一致
             } else if ('MozWebSocket' in window) {
                 alert("MozWebSocket");
                 websocket = new MozWebSocket("ws://echo");

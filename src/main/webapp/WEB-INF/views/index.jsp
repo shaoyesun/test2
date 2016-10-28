@@ -22,10 +22,10 @@
 <h5>----------------------------------save log--------------------------------</h5>
 <input type="button" value="Save Log" onclick="saveLog()"><span id="log"></span>
 <h5>----------------------------------websocket--------------------------------</h5>
-<form action="/user/websocket">
+<form action="/websocket/websocket">
     <input type="submit" value="websocket">
 </form>
-<form action="/user/websocket1">
+<form action="/websocket/websocket1">
     <input type="submit" value="websocket1">
 </form>
 <script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>

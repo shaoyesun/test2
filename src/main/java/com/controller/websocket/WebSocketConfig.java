@@ -6,7 +6,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 /**
- * Created by root on 16-10-26.
+ * 用于页面与后端管道的建立 Created by root on 16-10-26.
  */
 @Configuration
 @EnableWebSocket//开启websocket

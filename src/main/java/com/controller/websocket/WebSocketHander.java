@@ -17,7 +17,7 @@ public class WebSocketHander implements WebSocketHandler {
 
     private static Logger logger = Logger.getLogger(WebSocketHander.class);
 
-    private static int count = 0;
+    private static int count = 0;//统计建立管道数
 
     private static final ArrayList<WebSocketSession> users = new ArrayList<WebSocketSession>();
 
@@ -27,7 +27,6 @@ public class WebSocketHander implements WebSocketHandler {
         users.add(session);
         String userName = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
         if (userName != null) {
-            //查询未读消息
             count++;
             session.sendMessage(new TextMessage(count + ""));
         }
@@ -48,6 +47,7 @@ public class WebSocketHander implements WebSocketHandler {
         users.remove(webSocketSession);
     }
 
+    //关闭或离开此页面管道关闭
     public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
         logger.debug("链接关闭......" + closeStatus.toString());
         count--;
