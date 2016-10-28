@@ -16,7 +16,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by root on 16-10-16.
+ * 判断用户是否在线及剔除处理 Created by root on 16-10-16.
  */
 @Service
 @Transactional
@@ -41,7 +41,6 @@ public class LimiteLogin {
                 break;
             }
         }
-
         loginUserMap.put(user.getUserName(), sessionId);
         request.getSession().getServletContext().setAttribute("loginUserMap", loginUserMap);
         request.getSession().getServletContext().setAttribute("loginOutTime", loginOutTime);

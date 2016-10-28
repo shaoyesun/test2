@@ -50,14 +50,10 @@ public class OtherController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String userName, String password, RedirectAttributes redirectAttributes, HttpServletRequest request) {
-        String result = userService.login(userName, password);
+        //判断用户是否已经在线及处理（已在线则剔除）
         String loginLimite = limiteLogin.loginLimite(request, userName);
-        if (loginLimite.equals("logged")) {
-            redirectAttributes.addFlashAttribute("message", loginLimite);
-            redirectAttributes.addFlashAttribute("userName", userName);
-            return "redirect:/other/toLogin";
-        }
-
+        //判断用户名、密码是否正确
+        String result = userService.login(userName, password);
         if (result.equals("success")) {
             request.getSession().setAttribute("now_user", userService.findByUserName(userName));
 

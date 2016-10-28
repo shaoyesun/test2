@@ -24,13 +24,13 @@
             var websocket;
             if ('WebSocket' in window) {
                 alert("WebSocket");
-                websocket = new WebSocket("ws://192.168.8.28:8070/echo");
+                websocket = new WebSocket("ws://localhost:8070/echo");
             } else if ('MozWebSocket' in window) {
                 alert("MozWebSocket");
                 websocket = new MozWebSocket("ws://echo");
             } else {
                 alert("SockJS");
-                websocket = new SockJS("http://192.168.8.28:8070/sockjs/echo");
+                websocket = new SockJS("http://localhost:8070/sockjs/echo");
             }
             websocket.onopen = function (evnt) {
                 $("#tou").html("链接服务器成功!")
