@@ -81,12 +81,12 @@
 <script>
 function mess() {
     $.ajax({
-               type: "POST",
-               url: "/websocket/auditing",
-               success: function (data) {
-                   alert(data);
-               }
-           });
+        type: "POST",
+        url: "/websocket/auditing",
+        success: function (data) {
+            alert(data);
+        }
+    });
 }
 </script>
 </body>
