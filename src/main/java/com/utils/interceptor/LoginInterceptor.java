@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 登录拦截器
+ * 登录拦截器 1、未登录跳转登录页面 2、掉线保存当前链接，重定向到登录页面 3、用户被踢掉后给出提示信息
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
@@ -24,10 +24,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         User user = (User) session.getAttribute("now_user");
         if (session.getAttribute("now_user") == null) {
             //用户掉线，保存当前链接并重定向到登录页面
-            String queryUrl = request.getQueryString() == null ? "" : ("?" + request.getQueryString());//获取参数
-            String requestUrl = request.getServletPath() + queryUrl;//httpRequest.getServletPath(),获取链接
-            if (session.getAttribute("redirect_link") == null) {
-                session.setAttribute("redirect_link", requestUrl);
+            //String s = request.getHeader("x-requested-with");
+            if (request.getHeader("x-requested-with") == null) {//非ajax异步请求，则保存当前访问链接
+                String queryUrl = request.getQueryString() == null ? "" : ("?" + request.getQueryString());//获取参数
+                String requestUrl = request.getServletPath() + queryUrl;//httpRequest.getServletPath(),获取链接
+                if (session.getAttribute("redirect_link") == null) {
+                    session.setAttribute("redirect_link", requestUrl);
+                }
             }
             response.sendRedirect(request.getContextPath() + "/other/toLogin");
             return false;

@@ -30,7 +30,7 @@
             <bean class="com.utils.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
 
-        <!-- 访问日志 -->
+        <!-- 访问日志拦截器 自定义注解实现 -->
         <mvc:interceptor>
             <mvc:mapping path="/user/**"/>
             <bean class="com.utils.interceptor.LogInterceptor"/>
