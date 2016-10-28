@@ -57,6 +57,7 @@ public class OtherController {
         if (result.equals("success")) {
             request.getSession().setAttribute("now_user", userService.findByUserName(userName));
 
+            //
             String jwtToken = tokenService.createUserAuthToken(userService.findByUserName(userName));//生成token
             System.out.println(jwtToken);
             UserAuthenticationToken authToken = tokenService.retrieveUserAuthToken(jwtToken);//token解析
