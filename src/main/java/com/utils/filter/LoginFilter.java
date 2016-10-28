@@ -14,11 +14,9 @@ import javax.servlet.http.HttpSession;
 
 public class LoginFilter implements Filter {
 
-    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -44,7 +42,6 @@ public class LoginFilter implements Filter {
         }
     }
 
-    @Override
     public void destroy() {
 
     }

@@ -23,6 +23,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("now_user");
         if (session.getAttribute("now_user") == null) {
+            //用户掉线，保存当前链接并重定向到登录页面
+            String queryUrl = request.getQueryString() == null ? "" : ("?" + request.getQueryString());//获取参数
+            String requestUrl = request.getServletPath() + queryUrl;//httpRequest.getServletPath(),获取链接
+            if (session.getAttribute("redirect_link") == null) {
+                session.setAttribute("redirect_link", requestUrl);
+            }
             response.sendRedirect(request.getContextPath() + "/other/toLogin");
             return false;
         }

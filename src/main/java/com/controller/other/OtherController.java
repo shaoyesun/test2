@@ -57,16 +57,17 @@ public class OtherController {
         if (result.equals("success")) {
             request.getSession().setAttribute("now_user", userService.findByUserName(userName));
 
-            //
+            //创建token及验证
             String jwtToken = tokenService.createUserAuthToken(userService.findByUserName(userName));//生成token
             System.out.println(jwtToken);
             UserAuthenticationToken authToken = tokenService.retrieveUserAuthToken(jwtToken);//token解析
             System.out.println(authToken.isAuthenticated());
             System.out.println("id = " + UserAuthenticationToken.getCurrentToken().getUserUuid());
 
-            Object url = request.getSession().getAttribute("invite_link");
+            //用户掉线，登录后重定向到保存的链接
+            Object url = request.getSession().getAttribute("redirect_link");
             if (url != null) {
-                request.getSession().removeAttribute("invite_link");
+                request.getSession().removeAttribute("redirect_link");
                 return "redirect:" + url.toString();
             }
             return "index";
