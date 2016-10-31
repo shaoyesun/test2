@@ -22,7 +22,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("now_user");
-        if (session.getAttribute("now_user") == null) {
+        if (user == null) {
             //用户掉线，保存当前链接并重定向到登录页面
             //String s = request.getHeader("x-requested-with");
             if (request.getHeader("x-requested-with") == null) {//非ajax(异步)请求，则保存当前访问链接
