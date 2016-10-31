@@ -12,27 +12,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 登录拦截器 1、未登录跳转登录页面 2、掉线保存当前链接，重定向到登录页面,登录后重定向到要访问页面 3、用户被踢掉后给出提示信息
+ * 登录拦截器 1、未登录跳转登录页面 2、用户掉线或被挤掉保存当前链接，重定向到登录页面,登录后重定向到要访问页面 3、用户被踢掉后重定向到登录页面并给出提示信息
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("now_user");
-        //用户掉线或被挤掉，保存当前链接并重定向到登录页面
+        //用户掉线或被挤掉，保存当前链接以便登录后重定向到要访问的页面
         if (request.getHeader("x-requested-with") == null) {//非ajax(异步)请求，则保存当前访问链接
             String queryUrl = request.getQueryString() == null ? "" : ("?" + request.getQueryString());//获取参数
             String requestUrl = request.getServletPath() + queryUrl;//httpRequest.getServletPath(),获取链接
             session.setAttribute("redirect_link", requestUrl);
         }
+
+        User user = (User) session.getAttribute("now_user");
+        //未登录或掉线重定向到登录页面
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/other/toLogin");
             return false;
         }
 
-        //多用户登录限制判断,并给出提示信息
+        //判断用户是否已在别处登录，若登录给出提示信息
         boolean isLogin = false;
         if (user != null) {
             Map<String, String> loginUserMap = (Map<String, String>) session.getServletContext().getAttribute("loginUserMap");
