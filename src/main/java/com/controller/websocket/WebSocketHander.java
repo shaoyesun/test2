@@ -47,15 +47,15 @@ public class WebSocketHander implements WebSocketHandler {
         if (webSocketSession.isOpen()) {
             webSocketSession.close();
         }
-        logger.debug("链接出错，关闭链接......");
         count--;
+        logger.debug("链接出错，关闭链接......");
         users.remove(webSocketSession);
     }
 
     //关闭或离开此页面管道关闭
     public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
-        logger.debug("链接关闭......" + closeStatus.toString());
         count--;
+        logger.debug("链接关闭......" + closeStatus.toString());
         users.remove(webSocketSession);
     }
 
