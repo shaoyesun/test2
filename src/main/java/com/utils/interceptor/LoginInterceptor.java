@@ -25,7 +25,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (session.getAttribute("now_user") == null) {
             //用户掉线，保存当前链接并重定向到登录页面
             //String s = request.getHeader("x-requested-with");
-            if (request.getHeader("x-requested-with") == null) {//非ajax异步请求，则保存当前访问链接
+            if (request.getHeader("x-requested-with") == null) {//非ajax(异步)请求，则保存当前访问链接
                 String queryUrl = request.getQueryString() == null ? "" : ("?" + request.getQueryString());//获取参数
                 String requestUrl = request.getServletPath() + queryUrl;//httpRequest.getServletPath(),获取链接
                 if (session.getAttribute("redirect_link") == null) {

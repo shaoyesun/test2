@@ -9,6 +9,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by root on 16-10-26.
@@ -21,12 +23,16 @@ public class WebSocketHander implements WebSocketHandler {
 
     private static final ArrayList<WebSocketSession> users = new ArrayList<WebSocketSession>();
 
+    private static final Map<String, String> map = new HashMap();
+
     //初次链接成功执行
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.debug("链接成功......");
+        String sessionId = session.getId();
         users.add(session);
         String userName = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
         if (userName != null) {
+            map.put(userName, session.getId());
             count++;
             session.sendMessage(new TextMessage(count + ""));
         }
@@ -95,5 +101,9 @@ public class WebSocketHander implements WebSocketHandler {
                 break;
             }
         }
+    }
+
+    public static Map<String, String> getMap() {
+        return map;
     }
 }
