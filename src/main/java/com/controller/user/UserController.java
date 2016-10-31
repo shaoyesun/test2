@@ -112,7 +112,6 @@ public class UserController {
     @Log(desc = "中英文切换")
     @RequestMapping(value = "/changeLocal")
     public String changeLocal(HttpServletRequest request, String locale, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("now_user");
         Locale l = new Locale(locale);
         localeResolver.setLocale(request, response, l);
         return "index";
