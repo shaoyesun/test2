@@ -37,10 +37,10 @@ public class WebsocketController {
     @ResponseBody
     public String auditing(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("now_user");
-        WebSocketHander ws = webSocketHandler();
-        Map<String, String> map = ws.getMap();
+        Map<String, String> map = WebSocketHander.getMap();
         String sessionId = map.get(user.getUserName());
         webSocketHandler().sendMessageToUser(user.getUserName(), new TextMessage(user.getUserName()));
+        webSocketHandler().sendMessageToUsers(new TextMessage(user.getUserName()));
         return "success";
     }
 

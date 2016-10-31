@@ -28,7 +28,6 @@ public class WebSocketHander implements WebSocketHandler {
     //初次链接成功执行
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.debug("链接成功......");
-        String sessionId = session.getId();
         users.add(session);
         String userName = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
         if (userName != null) {
@@ -70,7 +69,6 @@ public class WebSocketHander implements WebSocketHandler {
      * @param message
      */
     public void sendMessageToUsers(TextMessage message) {
-        ArrayList<WebSocketSession> us = users;
         for (WebSocketSession user : users) {
             try {
                 if (user.isOpen()) {
