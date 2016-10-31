@@ -1,6 +1,5 @@
 package com.controller.user;
 
-import com.entity.User;
 import com.service.UserService;
 import com.utils.annotation.Log;
 
