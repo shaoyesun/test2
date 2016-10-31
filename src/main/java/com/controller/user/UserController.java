@@ -119,7 +119,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/index")
-    public String index(HttpServletRequest request) {
+    public String index() {
         return "index";
     }
 }
