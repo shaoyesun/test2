@@ -26,7 +26,7 @@ public class HandshakeInterceptor implements org.springframework.web.socket.serv
             if (session != null) {
                 //使用userName区分WebSocketHandler，以便定向发送消息
                 map.put("WEBSOCKET_USERNAME", user.getUserName());
-                servletRequest.getServletRequest().getSession().setAttribute("WEBSOCKET_USERNAME", user.getUserName());
+                //servletRequest.getServletRequest().getSession().setAttribute("WEBSOCKET_USERNAME", user.getUserName());
             }
         }
         return true;

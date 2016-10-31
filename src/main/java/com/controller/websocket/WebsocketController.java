@@ -40,7 +40,7 @@ public class WebsocketController {
         Map<String, String> map = WebSocketHander.getMap();
         String sessionId = map.get(user.getUserName());
         webSocketHandler().sendMessageToUser(user.getUserName(), new TextMessage(user.getUserName()));
-        webSocketHandler().sendMessageToUsers(new TextMessage(user.getUserName()));
+        //webSocketHandler().sendMessageToUsers(new TextMessage(user.getUserName()));
         return "success";
     }
 
