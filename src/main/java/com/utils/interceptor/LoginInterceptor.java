@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 登录拦截器 1、未登录跳转登录页面 2、掉线保存当前链接，重定向到登录页面 3、用户被踢掉后给出提示信息
+ * 登录拦截器 1、未登录跳转登录页面 2、掉线保存当前链接，重定向到登录页面,登录后重定向到要访问页面 3、用户被踢掉后给出提示信息
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
