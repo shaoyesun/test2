@@ -31,8 +31,8 @@ public class WebSocketHander implements WebSocketHandler {
         users.add(session);
         String userName = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
         if (userName != null) {
-            map.put(userName, session.getId());
             count++;
+            map.put(userName, session.getId());
             session.sendMessage(new TextMessage(count + ""));
         }
     }
