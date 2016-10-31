@@ -76,5 +76,7 @@
     </div><!-- /input-group -->
 </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
+<br><br>
+<a href="/user/index">back to index</a>
 </body>
 </html>

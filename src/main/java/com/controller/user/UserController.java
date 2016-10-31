@@ -46,15 +46,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
     public String register(String userName, String password, Model model) {
         String result = userService.register(userName, password);
         log.info("userName = " + userName + " add success!");
-        System.out.println(ConfigUtil.getValue("configFileTest"));
-        if (result.equals("success")) {
-            return "success";
-        }
-        model.addAttribute("message", result);
-        return "index";
+        return result;
     }
 
     /**
@@ -127,4 +123,8 @@ public class UserController {
         return "index";
     }
 
+    @RequestMapping(value = "/index")
+    public String index(HttpServletRequest request) {
+        return "index";
+    }
 }

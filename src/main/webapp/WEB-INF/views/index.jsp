@@ -5,10 +5,12 @@
     <%--<meta http-equiv="refresh" content="0;url=/test1">--%>
 </head>
 <body onload="findAll()">
+now user : ${now_user.userName}
+<h5>----------------------------------add user--------------------------------</h5>
 <form action="/user/register" method="post" id="form1">
-    name:<input type="text" name="userName" id="name">${message}<br><br>
+    name:<input type="text" name="userName" id="name"><span id="message">${message}</span><br><br>
     pass:<input type="text" name="password" id="pass"><br><br>
-    <input type="button" value="add" onclick="add()">${now_user.userName}<br><br>
+    <input type="button" value="add" onclick="add()"><br><br>
 </form>
 <h5>---------------------------<spring:message code="exit"/>------------------------------</h5>
 &nbsp;&nbsp;<a href="/user/loginOut">login out</a><br><br>
@@ -31,14 +33,24 @@
 <script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
 <script>
     function add() {
-        findAll();
         var userName = $("#name").val();
         var password = $("#pass").val();
         if (userName == "" || password == "") {
-            alert("please put infomation!");
+            $("#message").html("please put infomation!");
         } else {
-            window.document.getElementById("form1").submit();
-            findAll();
+            $.ajax({
+               type: "POST",
+               data:{userName : userName, password : password},
+               url: "/user/register",
+               success: function (data) {
+                   if(data == "existed"){
+                       $("#message").html("existed!");
+                   } else {
+                       $("#message").html("add success!");
+                   }
+                   findAll();
+               }
+           });
         }
     }
 
