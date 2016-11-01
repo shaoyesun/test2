@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class WebSocketHander implements WebSocketHandler {
 
-    private static Logger logger = Logger.getLogger(WebSocketHander.class);
+    private static Logger log = Logger.getLogger(WebSocketHander.class);
 
     private static int count = 0;//统计建立管道数
 
@@ -27,7 +27,7 @@ public class WebSocketHander implements WebSocketHandler {
 
     //初次链接成功执行
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        logger.debug("链接成功......");
+        log.debug("链接成功......");
         users.add(session);
         String userName = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
         if (userName != null) {
@@ -48,14 +48,14 @@ public class WebSocketHander implements WebSocketHandler {
             webSocketSession.close();
         }
         count--;
-        logger.debug("链接出错，关闭链接......");
+        log.debug("链接出错，关闭链接......");
         users.remove(webSocketSession);
     }
 
     //关闭或离开此页面管道关闭
     public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
         count--;
-        logger.debug("链接关闭......" + closeStatus.toString());
+        log.debug("链接关闭......" + closeStatus.toString());
         users.remove(webSocketSession);
     }
 
