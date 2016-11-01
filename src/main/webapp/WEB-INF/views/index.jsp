@@ -6,7 +6,7 @@
 </head>
 <body onload="findAll()">
 now user : ${now_user.userName}
-<h5>----------------------------------add user--------------------------------</h5>
+<h5>----------------------------------<spring:message code="addUser"/>--------------------------------</h5>
 <form action="/user/register" method="post" id="form1">
     name:<input type="text" name="userName" id="name"><span id="message">${message}</span><br><br>
     pass:<input type="text" name="password" id="pass"><br><br>
