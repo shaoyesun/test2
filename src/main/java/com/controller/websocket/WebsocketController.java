@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -35,12 +33,10 @@ public class WebsocketController {
      */
     @RequestMapping("/auditing")
     @ResponseBody
-    public String auditing(HttpServletRequest request) {
+    public String auditing(HttpServletRequest request, String index) {
         User user = (User) request.getSession().getAttribute("now_user");
-        Map<String, String> map = WebSocketHander.getMap();
-        String sessionId = map.get(user.getUserName());
-        //webSocketHandler().sendMessageToUser(user.getUserName(), new TextMessage(user.getUserName()));
-        webSocketHandler().sendMessageToUsers(new TextMessage(user.getUserName()));
+        //webSocketHandler().sendMessageToUser1(index + "_" + user.getUserName(), new TextMessage(user.getUserName()));
+        webSocketHandler().sendMessageToUsers1(index, new TextMessage(user.getUserName()));
         return "success";
     }
 

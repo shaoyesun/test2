@@ -26,10 +26,11 @@ public class WebSocketHander implements WebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         log.debug("链接成功......");
         users.add(session);
-        String userName = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
-        if (userName != null) {
+        String key = (String) session.getAttributes().get("websocket_index");
+        if (key != null) {
+            //未读消息处理逻辑
             count++;
-            map.put(userName, session.getId());
+            map.put(key, session.getId());
             session.sendMessage(new TextMessage(count + ""));
         }
     }
@@ -78,6 +79,21 @@ public class WebSocketHander implements WebSocketHandler {
         }
     }
 
+    public void sendMessageToUsers1(String index, TextMessage message) {
+        ArrayList<WebSocketSession> u = users;
+        Map<String, String> m = map;
+        for (WebSocketSession user : users) {
+            try {
+                String[] str = user.getAttributes().get("websocket_index").toString().split("_");
+                if (user.isOpen() && str[0].equals(index)) {
+                    user.sendMessage(message);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * 给某个用户发送消息
      *
@@ -87,7 +103,24 @@ public class WebSocketHander implements WebSocketHandler {
     public void sendMessageToUser(String userName, TextMessage message) {
         ArrayList<WebSocketSession> u = users;
         for (WebSocketSession user : users) {
-            if (user.getAttributes().get("WEBSOCKET_USERNAME").equals(userName)) {
+            if (user.getAttributes().get("websocket_index").equals(userName)) {
+                try {
+                    if (user.isOpen()) {
+                        user.sendMessage(message);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+    }
+
+    public void sendMessageToUser1(String index, TextMessage message) {
+        ArrayList<WebSocketSession> u = users;
+        Map<String, String> m = map;
+        for (WebSocketSession user : users) {
+            if (user.getId().equals(map.get(index))) {
                 try {
                     if (user.isOpen()) {
                         user.sendMessage(message);

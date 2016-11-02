@@ -33,6 +33,7 @@
                 websocket = new SockJS("http://localhost:8070/sockjs/echo");
             }
             websocket.onopen = function (evnt) {
+
                 $("#tou").html("链接服务器成功!")
             };
             websocket.onmessage = function (evnt) {
@@ -84,6 +85,7 @@
 function mess() {
     $.ajax({
         type: "POST",
+        data:{index : "echo"},
         url: "/websocket/auditing",
         success: function (data) {
             //alert(data);

@@ -49,6 +49,8 @@
     <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
         <property name="dbType" value="mysql" />
     </bean>
+
+	<!--<bean id="webSocketConfig" class="com.controller.websocket.WebSocketConfig"></bean>-->
 	
 	<!-- 创建sessinFactory -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

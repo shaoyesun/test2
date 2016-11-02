@@ -59,10 +59,10 @@
     <!--<task:annotation-driven/>-->
 
     <!--方法二:配置方式实现定时器-->
-    <bean id="timerController" class="com.controller.timer.TimerController"/>
+    <!--<bean id="timerController" class="com.controller.timer.TimerController"/>
     <task:scheduled-tasks>
         <task:scheduled ref="timerController" method="timeTest1" cron="0/5 * * * * ?"/>
-    </task:scheduled-tasks>
+    </task:scheduled-tasks>-->
 
     <!-- 设置视图解析类，使用默认的JSTL解析器 -->
     <bean id="viewResolver"

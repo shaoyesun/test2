@@ -24,13 +24,13 @@
             var websocket;
             if ('WebSocket' in window) {
                 alert("WebSocket");
-                websocket = new WebSocket("ws://localhost:8070/echo");
+                websocket = new WebSocket("ws://localhost:8070/echo1");
             } else if ('MozWebSocket' in window) {
                 alert("MozWebSocket");
-                websocket = new MozWebSocket("ws://echo");
+                websocket = new MozWebSocket("ws://echo1");
             } else {
                 alert("SockJS");
-                websocket = new SockJS("http://localhost:8070/sockjs/echo");
+                websocket = new SockJS("http://localhost:8070/sockjs/echo1");
             }
             websocket.onopen = function (evnt) {
                 $("#tou").html("链接服务器成功!")
@@ -77,6 +77,21 @@
 </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 <br><br>
+后台主动发送消息：<button class="btn btn-default" type="button" onclick="mess()">发送</button>
+<br><br>
 <a href="/user/index">back to index</a>
+<script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    function mess() {
+        $.ajax({
+            type: "POST",
+            data:{index : "echo1"},
+            url: "/websocket/auditing",
+            success: function (data) {
+               //alert(data);
+            }
+        });
+    }
+</script>
 </body>
 </html>
