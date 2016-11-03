@@ -37,8 +37,9 @@ public class WebSocketHander implements WebSocketHandler {
 
     //接受消息处理消息
     public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> webSocketMessage) throws Exception {
-        sendMessageToUsers(new TextMessage(webSocketMessage.getPayload() + ""));
-        //sendMessageToUser("123", new TextMessage(webSocketMessage.getPayload() + ""));
+        String index = webSocketSession.getAttributes().get("websocket_index").toString();
+        sendMessageToUsers1(index.split("_")[0], new TextMessage(webSocketMessage.getPayload() + ""));
+        //sendMessageToUser(index, new TextMessage(webSocketMessage.getPayload() + ""));
     }
 
     public void handleTransportError(WebSocketSession webSocketSession, Throwable throwable) throws Exception {
