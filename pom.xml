@@ -219,6 +219,8 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>${org.slf4j-version}</version>
     </dependency>
+
+    <!--log4j-->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
