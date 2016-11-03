@@ -29,8 +29,8 @@ public class SessionListener implements HttpSessionListener {
         if (user != null) {
             Map<String, String> loginUserMap = (Map<String, String>) event.getSession().getServletContext().getAttribute("loginUserMap");
             if(loginUserMap.get(user.getUserName()).equals(sessionId)){
-                log.info("clean user from application : " + user.getUserName());
                 loginUserMap.remove(user.getUserName());
+                log.info("clean user from application : " + user.getUserName());
                 event.getSession().getServletContext().setAttribute("loginUserMap", loginUserMap);
             }
         }
