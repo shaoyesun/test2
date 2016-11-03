@@ -49,10 +49,7 @@
             function send(){
                 if (websocket != null) {
                     var message = document.getElementById('message').value;
-                    var title = "message";
-                    var obj = {message:message,title:title};
-                    var str = JSON.stringify(obj);
-                    websocket.send(str);
+                    websocket.send("websocket1 : " + message);
                 } else {
                     alert('未与服务器链接.');
                 }
