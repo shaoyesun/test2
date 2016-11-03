@@ -35,7 +35,7 @@ public class WebsocketController {
     @ResponseBody
     public String auditing(HttpServletRequest request, String index) {
         User user = (User) request.getSession().getAttribute("now_user");
-        webSocketHandler().sendMessageToUser1(index + "_" + user.getUserName(), new TextMessage(user.getUserName()));
+        webSocketHandler().sendMessageToUser1(index + "_" + user.getUserName(), new TextMessage(index + ":" + user.getUserName()));
         //webSocketHandler().sendMessageToUsers1(index, new TextMessage(index + " : " + user.getUserName()));
         return "success";
     }
