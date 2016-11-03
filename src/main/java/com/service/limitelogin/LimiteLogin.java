@@ -2,7 +2,8 @@ package com.service.limitelogin;
 
 import com.entity.User;
 import com.service.UserService;
-import com.utils.DateUtil;
+import com.utils.date.DateFormatEnum;
+import com.utils.date.DateUtil;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class LimiteLogin {
         for (String key : loginUserMap.keySet()) {
             //用户已在另一处登录
             if (key.equals(user.getUserName()) && !loginUserMap.containsValue(sessionId)) {
-                log.info("用户：" + user.getUserName() + "，于" + DateUtil.dateFormat(new Date(), "yyyy-MM-dd HH:mm:ss") + "被剔除！");
-                loginOutTime.put(user.getUserName(), DateUtil.dateFormat(new Date(), "yyyy-MM-dd HH:mm:ss"));
+                log.info("用户：" + user.getUserName() + "，于" + DateUtil.dateFormat(new Date(), DateFormatEnum.format_19) + "被剔除！");
+                loginOutTime.put(user.getUserName(), DateUtil.dateFormat(new Date(), DateFormatEnum.format_19));
                 loginUserMap.remove(user.getUserName());
                 break;
             }
