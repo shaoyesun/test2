@@ -2,9 +2,11 @@ package com.controller.other;
 
 import com.service.UserService;
 import com.service.limitelogin.LimiteLogin;
+import com.service.limitelogin.SessionListener;
 import com.service.token.TokenService;
 import com.service.token.UserAuthenticationToken;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = "/other")
 public class OtherController {
+
+    private static Logger log = Logger.getLogger(OtherController.class);
 
     @Autowired
     private UserService userService;
@@ -52,6 +56,7 @@ public class OtherController {
     public String login(String userName, String password, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         //判断用户是否已经在线及处理（已在线则剔除）
         String loginLimite = limiteLogin.loginLimite(request, userName);
+        log.info("userName : " + userName + " " + loginLimite);
         //判断用户名、密码是否正确
         String result = userService.login(userName, password);
         if (result.equals("success")) {
@@ -70,6 +75,7 @@ public class OtherController {
                 request.getSession().removeAttribute("redirect_link");
                 return "redirect:" + url.toString();
             }
+            log.info("userName : " + userName + "login success!");
             return "index";
         }
         redirectAttributes.addFlashAttribute("message", result);
