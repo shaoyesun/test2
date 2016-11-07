@@ -28,7 +28,6 @@ public class SignerProvider implements InitializingBean {
     private String signingKey;
     private Signer signer;
 
-    @Override
     public void afterPropertiesSet() throws Exception {
         verifierKey = getFileString("verifier.key");
         signingKey = getFileString("signing.key");
