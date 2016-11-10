@@ -27,6 +27,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/user/**"/>
             <mvc:mapping path="/websocket/**"/>
+            <mvc:mapping path="/jquery/**"/>
             <bean class="com.utils.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
 
