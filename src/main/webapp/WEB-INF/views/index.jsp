@@ -30,6 +30,16 @@ now user : ${now_user.userName}
 <form action="/websocket/websocket1">
     <input type="submit" value="websocket1">
 </form>
+<h5>----------------------------------jquery--------------------------------</h5>
+<form action="/jquery/jquerySelector">
+    <input type="submit" value="JquerySelector">
+</form>
+<form action="/jquery/jqueryHideOrShow">
+    <input type="submit" value="JqueryHideOrShow">
+</form>
+<form action="/jquery/jqueryMethod">
+    <input type="submit" value="jqueryMethod">
+</form>
 <script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
 <script>
     function add() {
