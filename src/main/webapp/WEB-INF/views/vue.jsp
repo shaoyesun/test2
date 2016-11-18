@@ -63,8 +63,8 @@
 <h5>-----------------------POST-------------------------</h5>
 <div id="app5">
     <ul>
-        <li v-for="item in tabItems" >
-            {{ $index }} - {{ item.userName }} - {{ item.password }}
+        <li v-for="item in tabItems" @click="findAll()">
+            {{ $index + 1 }} - {{ item.userName }} - {{ item.password }}
         </li>
     </ul>
     <button @click="findAll()">find all user</button>
@@ -137,8 +137,9 @@
             }
         },
         /*beforeCreate: function () {
+            alert("123");
             var that = this;
-            $.post('/user/findAll1', function (res) {
+            $.post('/user/findAll', function (res) {
                 that.tabItems = res;
             },"JSON")
         },*/
