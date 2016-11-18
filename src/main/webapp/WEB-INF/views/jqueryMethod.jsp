@@ -12,6 +12,8 @@
     <script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
+    <a href="/user/index">back to index</a><br>
+    <h5>------------------------------******-------------------------------</h5>
     <div id="load1"></div>
     <div id="load2"></div>
     <button id="load">load</button>

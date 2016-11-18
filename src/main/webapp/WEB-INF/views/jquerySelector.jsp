@@ -12,6 +12,8 @@
     <script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
+<a href="/user/index">back to index</a><br>
+<h5>------------------------------******-------------------------------</h5>
 <p id="demo" class="demo">click me will hind</p>
 
 <a href="#">I am a no  #</a><br><br>

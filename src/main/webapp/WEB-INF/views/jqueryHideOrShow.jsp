@@ -22,7 +22,8 @@
     </style>
 </head>
 <body>
-
+<a href="/user/index">back to index</a><br>
+<h5>------------------------------******-------------------------------</h5>
 <a href="#">I am a no  #</a><br><br>
 <a href="#">I am a has #</a><br><br>
 

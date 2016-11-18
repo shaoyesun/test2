@@ -40,7 +40,12 @@ now user : ${now_user.userName}
 <form action="/jquery/jqueryMethod">
     <input type="submit" value="jqueryMethod">
 </form>
-<script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>
+<h5>----------------------------------vue--------------------------------</h5>
+<form action="/vue/vueStudy">
+    <input type="submit" value="Vue Study">
+</form>
+<%--<script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>--%>
+<script src="/static/js/jquery/jquery-2.1.1.min.js"></script>
 <script>
     function add() {
         var userName = $("#name").val();
