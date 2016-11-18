@@ -4,19 +4,18 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-	http://www.springframework.org/schema/task
-	http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <!-- 启动Srping组件自动扫描机制,Spring会自动扫描base-package包及其子包下面的类 -->
     <context:component-scan base-package="com.controller"/>
+
+    <mvc:resources location="/static/" mapping="/static/**"/>
 
     <!-- 启用Spring MVC注解功能 -->
     <mvc:annotation-driven/>
@@ -28,6 +27,7 @@
             <mvc:mapping path="/user/**"/>
             <mvc:mapping path="/websocket/**"/>
             <mvc:mapping path="/jquery/**"/>
+            <mvc:mapping path="/vue/**"/>
             <bean class="com.utils.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
 
