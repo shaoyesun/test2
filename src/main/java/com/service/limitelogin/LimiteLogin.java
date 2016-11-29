@@ -37,8 +37,8 @@ public class LimiteLogin {
         for (String key : loginUserMap.keySet()) {
             //用户已在另一处登录
             if (key.equals(user.getUserName()) && !loginUserMap.containsValue(sessionId)) {
-                log.info("用户：" + user.getUserName() + "，于" + DateUtil.dateFormat(new Date(), DateFormatEnum.format_19) + "被剔除！");
-                loginOutTime.put(user.getUserName(), DateUtil.dateFormat(new Date(), DateFormatEnum.format_19));
+                log.info("用户：" + user.getUserName() + "，于" + DateUtil.dateFormat(new Date(), DateUtil.FORMAT_19) + "被剔除！");
+                loginOutTime.put(user.getUserName(), DateUtil.dateFormat(new Date(), DateUtil.FORMAT_10));
                 loginUserMap.remove(user.getUserName());
                 index = "has_login";
                 break;
