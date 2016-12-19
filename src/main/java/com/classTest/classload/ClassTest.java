@@ -26,7 +26,7 @@ public class ClassTest {
             System.out.println("返回一个 Constructor 对象，它反映此 Class 对象所表示的类的指定公共构造方法 : " + Class.forName("com.classTest.classload.CTest"));
             System.out.println("返回一个包含某些 Constructor 对象的数组，这些对象反映此 Class 对象所表示的类的所有公共构造方法 : " + Class.forName("com.classTest.classload.CTest").getConstructors().length);
 
-            System.out.println(" 返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段 : " + Class.forName("com.classTest.classload.CTest").getDeclaredField("age").getName());
+            System.out.println("返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段 : " + Class.forName("com.classTest.classload.CTest").getDeclaredField("age").getName());
             System.out.println("返回 Field 对象的一个数组，这些对象反映此 Class 对象所表示的类或接口所声明的所有字段 : " + Class.forName("com.classTest.classload.CTest").getDeclaredFields().length);
             System.out.println("返回一个 Field 对象，它反映此 Class 对象所表示的类或接口的指定公共成员字段 : " + Class.forName("com.classTest.classload.CTest").getField("str"));
             System.out.println("返回一个包含某些 Field 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有可访问公共字段 : " + Class.forName("com.classTest.classload.CTest").getFields().length);
