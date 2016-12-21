@@ -4,17 +4,16 @@ package com.classTest.thread;
  * Created by root on 16-12-5.
  */
 public class SynchronizedTest {
-
     public static void main(String[] args) {
         final Outputter output = new Outputter();
         new Thread() {
             public void run() {
-                output.output("zhangsan");
+                output.output("Thread ");
             }
         }.start();
         new Thread() {
             public void run() {
-                output.output("lisi");
+                output.output("synchronized ");
             }
         }.start();
     }
