@@ -15,4 +15,9 @@ public class VueController {
         return "vue";
     }
 
+    @RequestMapping(value = "/vueStudy1")
+    public String vueStudy1(){
+        return "vue/vue";
+    }
+
 }
