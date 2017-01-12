@@ -44,11 +44,13 @@ now user : ${now_user.userName}
 <form action="/vue/vueStudy/vue/0">
     <input type="submit" value="Vue Study"><br>
 </form>
+<h5><spring:message code="component"/></h5>
 <form action="/vue/vueStudy/vue/component">
     <input type="submit" value="Vue component"><br>
 </form>
+<h5><spring:message code="von"/></h5>
 <form action="/vue/vueStudy/vue/v-on">
-    <input type="submit" value="Vue v-on"><br>
+    <input type="submit" value="Vue v-on $emit"><br>
 </form>
 <%--<script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>--%>
 <script src="/static/js/jquery/jquery-2.1.1.min.js"></script>
