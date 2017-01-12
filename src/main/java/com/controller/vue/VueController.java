@@ -1,6 +1,7 @@
 package com.controller.vue;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,14 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/vue")
 public class VueController {
 
-    @RequestMapping(value = "/vueStudy")
-    public String vueStudy(){
-        return "vue";
+    @RequestMapping(value = "/vueStudy/{pack}/{view}")
+    public String vueStudy(@PathVariable String pack, @PathVariable String view) {
+        if (view.equals("0")) return pack;
+        return pack + "/" + view;
     }
-
-    @RequestMapping(value = "/vueStudy1")
-    public String vueStudy1(){
-        return "vue/vue";
-    }
-
 }

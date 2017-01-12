@@ -41,11 +41,14 @@ now user : ${now_user.userName}
     <input type="submit" value="jqueryMethod">
 </form>
 <h5>----------------------------------vue--------------------------------</h5>
-<form action="/vue/vueStudy">
+<form action="/vue/vueStudy/vue/0">
     <input type="submit" value="Vue Study"><br>
 </form>
-<form action="/vue/vueStudy1">
-    <input type="submit" value="Vue Study"><br>
+<form action="/vue/vueStudy/vue/component">
+    <input type="submit" value="Vue component"><br>
+</form>
+<form action="/vue/vueStudy/vue/v-on">
+    <input type="submit" value="Vue v-on"><br>
 </form>
 <%--<script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>--%>
 <script src="/static/js/jquery/jquery-2.1.1.min.js"></script>
