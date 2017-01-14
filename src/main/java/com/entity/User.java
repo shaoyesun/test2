@@ -19,6 +19,10 @@ public class User {
     private String userName;
     @Column(name = "password")
     private String password;
+    @Column(name = "icon")
+    private String icon;
+    @Column(name = "url")
+    private String url;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,5 +48,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

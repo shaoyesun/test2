@@ -6,6 +6,15 @@
 </head>
 <body onload="findAll()">
 now user : ${now_user.userName}
+<h5>uper data</h5>
+<form action="/vue/uperDate" enctype="multipart/form-data" method="post">
+    <input type="file" name="photo">
+    <input type="file" name="data">
+    <input type="submit" value="commit">
+</form>
+<ul>
+    <li><a href="/vue/downloadClient">download</a></li>
+</ul>
 <h5>----------------------------------<spring:message code="addUser"/>--------------------------------</h5>
 <form action="/user/register" method="post" id="form1">
     name:<input type="text" name="userName" id="name"><span id="message">${message}</span><br><br>
@@ -52,6 +61,7 @@ now user : ${now_user.userName}
 <form action="/vue/vueStudy/vue/v-on">
     <input type="submit" value="Vue v-on $emit"><br>
 </form>
+
 <%--<script src="http://js.biocloud.cn/jquery/1.11.3/jquery.min.js"></script>--%>
 <script src="/static/js/jquery/jquery-2.1.1.min.js"></script>
 <script>
