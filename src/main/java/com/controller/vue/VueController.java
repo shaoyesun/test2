@@ -37,7 +37,7 @@ public class VueController {
     public String uperDate(MultipartFile photo, MultipartFile data, HttpServletRequest request) throws IOException {
         if(!photo.isEmpty()) {
             ServletContext sc = request.getSession().getServletContext();
-            String dir = sc.getRealPath("/update");
+            String dir = sc.getRealPath("/uploads");
 
             String fileName = photo.getOriginalFilename();
             FileUtils.writeByteArrayToFile(new File("/home/bmk/uploads", fileName), photo.getBytes());
@@ -45,8 +45,8 @@ public class VueController {
         }
         if(!data.isEmpty()) {
             ServletContext sc = request.getSession().getServletContext();
-            String dir = sc.getRealPath("/update");
-
+            String dir = sc.getRealPath("/uploads");
+            System.out.println("size = " + getFileMB(data.getSize()));
             String fileName = data.getOriginalFilename();
             System.out.println("filename : " + fileName);
             System.out.println("icon url : /home/bmk/uploads/" + fileName);
@@ -55,12 +55,19 @@ public class VueController {
         return "index";
     }
 
+    private Double getFileMB(long byteFile){
+        if(byteFile==0)
+            return 0.0;
+        double kb=1024 * 1024;
+        return byteFile/kb;
+    }
+
     /**
      * 文件下载
      */
     @RequestMapping(value = "/downloadClient", method = RequestMethod.GET)
     public void downLoadClientFile(String fileName, HttpServletResponse response) throws IOException {
-        fileName = "10896橙色活力PPT模板(www.52ppt.com).pptx";
+        fileName = "测试.pptx";
         /*try {
             fileName = new String(fileName.getBytes("ISO-8859-1"), "UTF-8");
         } catch (Exception e) {

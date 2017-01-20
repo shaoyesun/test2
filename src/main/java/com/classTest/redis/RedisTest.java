@@ -1,11 +1,11 @@
 package com.classTest.redis;
 
-import org.redisson.Config;
+/*import org.redisson.Config;
 import org.redisson.Redisson;
 
 import java.util.Queue;
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentMap;*/
 
 /**
  * Created by root on 16-12-9.
@@ -14,7 +14,7 @@ public class RedisTest {
 
     public static void main(String[] args) {
         // 1.初始化
-        Config config = new Config();
+       /* Config config = new Config();
         config.setConnectionPoolSize(10);
         config.addAddress("127.0.0.1:6379");
         Redisson redisson = Redisson.create(config);
@@ -49,7 +49,7 @@ public class RedisTest {
         System.out.println("resultQueue==="+resultQueue);
 
         // 关闭连接
-        redisson.shutdown();
+        redisson.shutdown();*/
     }
 
 
