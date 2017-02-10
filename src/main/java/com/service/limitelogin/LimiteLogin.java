@@ -33,6 +33,7 @@ public class LimiteLogin {
     public String loginLimite(HttpServletRequest request, String userName) {
         User user = userService.findByUserName(userName);
         String sessionId = request.getSession().getId();
+        System.out.println("------" + sessionId);
         String index = "no_login";
         for (String key : loginUserMap.keySet()) {
             //用户已在另一处登录
