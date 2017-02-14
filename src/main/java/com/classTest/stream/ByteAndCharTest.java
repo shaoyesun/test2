@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 public class ByteAndCharTest {
     public static void main(String[] args) throws Exception {
         String str = "中国人";
+        //FileOutputStream fos = new FileOutputStream("/home/bmk/test.txt",true);
         /*FileOutputStream fos = new FileOutputStream("/home/bmk/test.txt");
         fos.write(str.getBytes("UTF-8"));
         fos.close();*/
@@ -54,6 +55,7 @@ public class ByteAndCharTest {
          * 按行读取写入
          */
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/home/bmk/test.sh"), "UTF-8"));
+        //BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/home/bmk/test.txt", true), "UTF-8"));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/home/bmk/test.txt"), "UTF-8"));
         String myStr = "";
         while ((myStr = br.readLine()) != null) {
