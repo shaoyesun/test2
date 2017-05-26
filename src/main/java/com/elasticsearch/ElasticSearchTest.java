@@ -1,11 +1,19 @@
 package com.elasticsearch;
 
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 
 /**
  * @ 参考:http://www.656463.com/article/vU7jYr.htm
@@ -59,12 +67,69 @@ public class ElasticSearchTest {
         closeClient(client);
     }
 
+    public static void addData() {
+        String[] desc = new String[]{
+                "玉屏风口服液",
+                "清咽丸",
+                "四消丸",
+                "感冒清胶囊",
+                "人参归脾丸",
+                "人参健脾丸",
+                "明目地黄丸",
+                "小儿咳喘灵颗粒",
+                "小儿化痰止咳冲剂",
+                "双黄连",
+                "六味地黄丸"
+        };
+        Client client = getClient();
+        int j= 0;
+        BulkRequestBuilder bulkRequest = client.prepareBulk();
+        for(int i=4;i<14;i++){
+            LogModel l = new LogModel();
+            l.setDesc(desc[j]);
+            j++;
+            String json = ESUtils.toJson(l);
+            IndexRequestBuilder indexRequest = client.prepareIndex("secisland", "tweet")
+                    //指定不重复的ID
+                    .setSource(json).setId(String.valueOf(i));
+            //添加到builder中
+            bulkRequest.add(indexRequest);
+        }
+
+        BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+        if (bulkResponse.hasFailures()) {
+            // process failures by iterating through each bulk response item
+            System.out.println(bulkResponse.buildFailureMessage());
+        }
+        closeClient(client);
+    }
+
+    public static void query() {
+        Client client = getClient();
+        QueryBuilder query = QueryBuilders.matchQuery("desc", "小儿颗粒丸");
+        SearchResponse response = client.prepareSearch("secisland")
+                .setTypes("tweet")
+                //设置查询条件,
+                .setQuery(query)
+                .setFrom(0).setSize(60)
+                .execute()
+                .actionGet();
+        /**
+         * SearchHits是SearchHit的复数形式，表示这个是一个列表
+         */
+        SearchHits shs = response.getHits();
+        for(SearchHit hit : shs){
+            System.out.println("分数(score):"+hit.getScore()+", 业务描述(desc):"+
+                    hit.getSource().get("desc"));
+        }
+        client.close();
+    }
+
     public static void main(String[] args) {
-        //添加索引
         //addIndex();
-
         //delIndex();
-
-        getIndex();
+        //getIndex();
+        //addData();
+        query();
     }
 }
