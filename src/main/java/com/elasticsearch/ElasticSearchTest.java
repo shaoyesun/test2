@@ -8,7 +8,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 
 /**
- * @参考:http://www.656463.com/article/vU7jYr.htm
+ * @ 参考:http://www.656463.com/article/vU7jYr.htm
  * @ 1.添加索引
  * @ 2.删除索引中指定类别的指定记录
  * @ 3.获取指定索引的指定类别的指定记录
