@@ -461,11 +461,18 @@
       <version>${org.springframework-version}</version>
     </dependency>
 
-    <!-- jedis -->
+    <!-- redis jedis -->
     <dependency>
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
       <version>2.9.0</version>
+    </dependency>
+
+    <!-- elasticsearch -->
+    <dependency>
+      <groupId>org.elasticsearch</groupId>
+      <artifactId>elasticsearch</artifactId>
+      <version>1.7.6</version>
     </dependency>
 
   </dependencies>
