@@ -84,7 +84,7 @@ public class ElasticSearchTest {
         Client client = getClient();
         int j= 0;
         BulkRequestBuilder bulkRequest = client.prepareBulk();
-        for(int i=4;i<14;i++){
+        for(int i=1;i<10;i++){
             LogModel l = new LogModel();
             l.setDesc(desc[j]);
             j++;
@@ -106,7 +106,7 @@ public class ElasticSearchTest {
 
     public static void query() {
         Client client = getClient();
-        QueryBuilder query = QueryBuilders.matchQuery("desc", "小儿颗粒丸");
+        QueryBuilder query = QueryBuilders.matchQuery("desc", "小儿颗粒");
         SearchResponse response = client.prepareSearch("secisland")
                 .setTypes("tweet")
                 //设置查询条件,
